@@ -15,7 +15,7 @@ namespace Respinar\ContaoGlide;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class RespinarChartjsBundle extends Bundle
+class RespinarContaoGlideBundle extends Bundle
 {
     public function getPath(): string
     {
