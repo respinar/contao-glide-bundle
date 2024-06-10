@@ -20,13 +20,6 @@
             "Respinar\\ContaoGlide\\": "src/"
         }
     },
-    "config": {
-        "allow-plugins": {
-            "bamarni/composer-bin-plugin": true,
-            "contao-components/installer": true,
-            "contao/manager-plugin": true
-        }
-    },
     "extra": {
         "contao-manager-plugin": "Respinar\\ContaoGlide\\ContaoManager\\Plugin"
     }
