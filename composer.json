@@ -21,6 +21,6 @@
         }
     },
     "extra": {
-        "contao-manager-plugin": "Respinar\\ContaoGlide\\ContaoGlideBundle\\Plugin"
+        "contao-manager-plugin": "Respinar\\ContaoGlideBundle\\ContaoManager\\Plugin"
     }
 }
