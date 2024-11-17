@@ -3,6 +3,6 @@
     "@glidejs/glide": "^3.7.1"
   },
   "scripts": {
-    "postinstall": "cp -r node_modules/@glidejs/glide/dist public/"
+    "postinstall": "cp -r node_modules/@glidejs/glide/dist public/glide/"
   }
 }
