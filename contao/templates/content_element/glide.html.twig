@@ -1,0 +1,84 @@
+{% extends "@Contao/content_element/_base.html.twig" %}
+{% use "@Contao/component/_stylesheet.html.twig" %}
+
+{% block content %}
+    {% set glides_attributes = attrs()
+        .addClass('glide__track')
+        .set('data-delay', delay)
+        .set('data-speed', speed)
+        .set('data-offset', offset)
+        .set('data-loop', loop)
+        .set('data-glide-el', 'track')
+        .mergeWith(glide_attributes|default)
+    %}
+    <div{{ glides_attributes }}>
+        {% set slider_wrapper_attributes = attrs()
+            .addClass('glide__slides')
+            .mergeWith(slider_wrapper_attributes|default)
+        %}
+        <div{{ slider_wrapper_attributes }}>
+            {% block slides %}
+                {% for element in nested_fragments %}
+                    {% block slide %}
+                        {% set slide_attributes = attrs()
+                            .addClass('glide__slide')
+                            .mergeWith(slide_attributes|default)
+                        %}
+                        <div{{ slide_attributes }}>
+                            {% block slide_inner %}
+                                {{ content_element(element) }}
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+                {% endfor %}
+            {% endblock %}
+        </div>
+        {% block controls %}
+            <div data-glide-el="controls">
+                {% set button_prev_attributes = attrs()
+                    .set('type', 'button')
+                    .set('data-glide-dir',">")
+                    .addClass('glide-button-prev')                
+                    .mergeWith(button_prev_attributes|default)
+                %}
+                <button{{ button_prev_attributes }}>PREV</button>
+                {% set button_next_attributes = attrs()
+                    .set('type', 'button')
+                    .set('data-glide-dir',"<")
+                    .addClass('glide-button-next')
+                    .mergeWith(button_next_attributes|default)
+                %}
+                <button{{ button_next_attributes }}>NEXT</button>                
+            </div>
+            {% set pagination_attributes = attrs()
+                .addClass('glide-pagination')
+                .mergeWith(pagination_attributes|default)
+            %}
+            <div{{ pagination_attributes }}></div>
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block script %}
+    {% add "glide_js" to body %}
+        {% set script_attributes = attrs()
+            .setIfExists('nonce', csp_nonce('script-src'))
+            .mergeWith(script_attributes|default)
+        %}
+        <script{{ script_attributes }}>
+            new Glide('.content-glide',
+                        {
+                            type: 'slider'
+                        }
+                    ).mount();         
+        </script>
+    {% endadd %}
+{% endblock %}
+
+{% block style %}
+    {% add "swiper_css" to stylesheets %}
+        {% with {file: 'bundles/respinarcontaoglide/glide/css/glide.core.min.css'} %}
+            {{ block('stylesheet_component') }}
+        {% endwith %}
+    {% endadd %}
+{% endblock %}
